@@ -1,13 +1,17 @@
 package hu.kirdev.demo.service
 
+import hu.kirdev.demo.`interface`.MovieGenre
 import hu.kirdev.demo.`interface`.MovieService
 import hu.kirdev.demo.converter.MovieEntityToMovie
 import hu.kirdev.demo.converter.MovieToMovieEntity
 import hu.kirdev.demo.model.Movie
+import hu.kirdev.demo.model.MovieEntity
 import hu.kirdev.demo.repository.MovieRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
 import java.util.*
 import javax.annotation.PostConstruct
 
@@ -41,9 +45,34 @@ class MovieServiceImpl: MovieService {
             return
         }
 
-        var csvFile: File = File(javaClass.classLoader.getResource("movies.csv").file)
-
         try {
+
+            Files.readAllLines(Path.of("src/main/resources/movies.csv"))
+                    .drop(1)
+                    .map {
+                        line -> line.split(',')
+                    }
+                    .map {
+                        data ->
+                            movieRepository.save(
+                                    MovieEntity(
+                                            movieTitle = data[0],
+                                            movieGenre = when (data[1]) {
+                                                "Action" -> MovieGenre.ACTION
+                                                "Animation" -> MovieGenre.ANIMATION
+                                                "Comedy" -> MovieGenre.COMEDY
+                                                "Drama" -> MovieGenre.DRAMA
+                                                "Fantasy" -> MovieGenre.FANTASY
+                                                "Romance" -> MovieGenre.ROMANCE
+                                                else -> MovieGenre.ACTION
+                                            }, // MovieGenre.valueOf(data[1].toUpperCase())
+                                            movieReviewScore = data[2].toInt(),
+                                            movieReleaseYear = data[3].toInt()
+                                    )
+                            )
+                    }
+/*
+            var csvFile: File = File(javaClass.classLoader.getResource("movies.csv").file)
 
             var scanner: Scanner = Scanner(csvFile)
             // we skip the header
@@ -75,7 +104,7 @@ class MovieServiceImpl: MovieService {
             }
 
             scanner.close()
-
+*/
         } catch (ex: Exception) {
 
             ex.printStackTrace()

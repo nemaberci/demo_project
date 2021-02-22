@@ -13,7 +13,7 @@ open class MovieEntityToMovie {
                 title = movieEntity.title,
                 releaseYear = movieEntity.releaseYear,
                 reviewScore = movieEntity.reviewScore,
-                genre = movieEntity.genre,
+                genre = movieEntity.genre.toString(),
                 ID = movieEntity.ID
         )
 

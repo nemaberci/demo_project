@@ -28,7 +28,7 @@
         <tbody>
             <tr th:each="movie: ${movies}">
                 <td th:text="${movie.getTitle()}"></td>
-                <td th:text="${movie.getGenre()}"></td>
+                <td th:text="${movie.getGenre().toString()}"></td>
                 <td th:text="${movie.getReleaseYear()}"></td>
                 <td th:text="${movie.getReviewScore()}"></td>
             </tr>

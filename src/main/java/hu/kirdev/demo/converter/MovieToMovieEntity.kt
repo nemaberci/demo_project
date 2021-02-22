@@ -1,5 +1,6 @@
 package hu.kirdev.demo.converter
 
+import hu.kirdev.demo.`interface`.MovieGenre
 import hu.kirdev.demo.model.Movie
 import hu.kirdev.demo.model.MovieEntity
 import org.springframework.stereotype.Component
@@ -11,7 +12,7 @@ open class MovieToMovieEntity {
 
         return MovieEntity(
                 movieTitle = movie.title,
-                movieGenre = movie.genre,
+                movieGenre = MovieGenre.valueOf(movie.genre.toUpperCase()),
                 movieReleaseYear = movie.releaseYear,
                 movieReviewScore = movie.reviewScore
         )
