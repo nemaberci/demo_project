@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <meta charset="UTF-8">
+    <title>Demo alkalmazás</title>
+</head>
+<body>
+<section class="section">
+    <table id="datatable">
+        <thead>
+            <tr>
+                <th>
+                    Név
+                </th>
+                <th>
+                    Műfaj
+                </th>
+                <th>
+                    Kiadás éve
+                </th>
+                <th>
+                    Pontszám (%)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="movie: ${movies}">
+                <td th:text="${movie.getTitle()}"></td>
+                <td th:text="${movie.getGenre()}"></td>
+                <td th:text="${movie.getReleaseYear()}"></td>
+                <td th:text="${movie.getReviewScore()}"></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#datatable').DataTable();
+    } );
+</script>
+</body>
+</html>
