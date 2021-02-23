@@ -35,50 +35,9 @@ class MovieServiceImpl: MovieService {
         movieRepository.save( movieToMovieEntity.convert(movie) )
     }
 
-    @PostConstruct
     override fun initMovies() {
 
-        if (movieRepository.count() > 0) {
-
-            println("System already has ${movieRepository.count()} elements.")
-
-            return
-        }
-
-        try {
-
-            Files.readAllLines(Path.of("src/main/resources/movies.csv"))
-                    .drop(1)
-                    .map {
-                        line -> line.split(',')
-                    }
-                    .map {
-                        data ->
-                            movieRepository.save(
-                                    MovieEntity(
-                                            movieTitle = data[0],
-                                            movieGenre = when (data[1]) {
-                                                "Action" -> MovieGenre.ACTION
-                                                "Animation" -> MovieGenre.ANIMATION
-                                                "Comedy" -> MovieGenre.COMEDY
-                                                "Drama" -> MovieGenre.DRAMA
-                                                "Fantasy" -> MovieGenre.FANTASY
-                                                "Romance" -> MovieGenre.ROMANCE
-                                                else -> MovieGenre.ACTION
-                                            }, // MovieGenre.valueOf(data[1].toUpperCase())
-                                            movieReviewScore = data[2].toInt(),
-                                            movieReleaseYear = data[3].toInt()
-                                    )
-                            )
-                    }
-
-        } catch (ex: Exception) {
-
-            ex.printStackTrace()
-
-        }
-
-        println("Added ${movieRepository.count()} elements.")
+        // TODO
 
     }
 
