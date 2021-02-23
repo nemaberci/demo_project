@@ -71,40 +71,7 @@ class MovieServiceImpl: MovieService {
                                     )
                             )
                     }
-/*
-            var csvFile: File = File(javaClass.classLoader.getResource("movies.csv").file)
 
-            var scanner: Scanner = Scanner(csvFile)
-            // we skip the header
-            scanner.nextLine()
-
-            scanner.useDelimiter(",|\\n")
-
-            while (scanner.hasNext()) {
-
-                // Film,Genre,Lead Studio,Audience score %,Profitability,Rotten Tomatoes %,Worldwide Gross,Year
-                val title = scanner.next()
-                val genre = scanner.next()
-                scanner.next()
-                scanner.next()
-                scanner.next()
-                val score = scanner.next().toInt()
-                scanner.next()
-                val year = scanner.next().toInt()
-                // println("Parsed: $title, $genre, $score, $year")
-                addMovie(
-                        Movie(
-                                title = title,
-                                genre = genre,
-                                reviewScore = score,
-                                releaseYear = year
-                        )
-                )
-
-            }
-
-            scanner.close()
-*/
         } catch (ex: Exception) {
 
             ex.printStackTrace()
