@@ -6,8 +6,4 @@ data class Movie (
         var reviewScore: Int,
         var genre: String,
         var ID: Long = 0
-) {
-
-
-
-}
+) {}

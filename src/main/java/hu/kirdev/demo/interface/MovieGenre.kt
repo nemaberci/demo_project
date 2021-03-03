@@ -9,7 +9,6 @@ enum class MovieGenre {
     ROMANCE;
 
     override fun toString(): String {
-        println(super.toString().toLowerCase().capitalize())
         return super.toString().toLowerCase().capitalize()
     }
 

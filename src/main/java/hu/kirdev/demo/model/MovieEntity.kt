@@ -1,13 +1,12 @@
 package hu.kirdev.demo.model
 
 import hu.kirdev.demo.`interface`.MovieGenre
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
+import javax.persistence.*
 
 @Entity
 class MovieEntity (var movieTitle: String = "", var movieReleaseYear: Int = 0, var movieReviewScore: Int = 0, var movieGenre: MovieGenre = MovieGenre.ACTION) {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue
     var ID: Long = 0
 
